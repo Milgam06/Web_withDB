@@ -1,4 +1,3 @@
-from tkinter.font import names
 import pymysql
 import pandas
 import json
