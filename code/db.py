@@ -1,7 +1,21 @@
+from tkinter.font import names
 import pymysql
 import pandas
 import json
 import jwt
+
+
+name = ""
+email = ""
+num = ""
+
+def information():
+    global name, email, num
+    print("If you finish to put your information, You can no longer change it.")
+    name = str("Name: ")
+    email = str("Email: ")
+    num = str("Number (No hyphen): ")
+    
 
 # milgamDB connect
 milgamDB = pymysql.connect(
@@ -28,6 +42,12 @@ result = pandas.DataFrame(result)
 print(result)
 
 
+def plusData():
+    sql = f'''INSERT INTO mandarinDB (id, name, email, num, token)
+        Value ('0001', '{name}', '{email}', '{num}', 'afdafafsfdfasafefasewq23');'''
+    cursor.execute(sql)
+    milgamDB.commit()
+    
+    
+    
 
-sql = '''INSERT INTO mandarinDB (id, name, email)
-    Value ('3', ');'''
