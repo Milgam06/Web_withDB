@@ -8,7 +8,7 @@ from time import sleep
 name = ""
 email = ""
 num = ""
-id = 0
+id = 1
 
 def information():
     global name, email, num
@@ -50,6 +50,7 @@ def plusData():
         Value ('{id+1}', '{name}', '{email}', '{num}', 'token');'''
     cursor.execute(sql)
     milgamDB.commit()
+
     
     
 
