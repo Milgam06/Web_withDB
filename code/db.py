@@ -10,6 +10,7 @@ email = ""
 num = ""
 id = 1
 
+# input information
 def information():
     global name, email, num
     print("If you finish to put your information, You can no longer change it.")
@@ -40,9 +41,13 @@ cursor.execute(sql)
 result = cursor.fetchall()
 
 
+# INSERT the information into the database
 def plusData():
     global id
-    id = result[-1][0]
+    try:
+        id = result[-1][0]
+    except IndexError:
+        id = 0
     for i in range(4):
         sleep(0.25)
         print(".", end="")
@@ -50,10 +55,7 @@ def plusData():
         Value ('{id+1}', '{name}', '{email}', '{num}', 'token');'''
     cursor.execute(sql)
     milgamDB.commit()
+    return print(" success😎")
 
     
     
-
-information()
-plusData()
-
