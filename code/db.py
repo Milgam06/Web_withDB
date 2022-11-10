@@ -48,7 +48,7 @@ def plusData():
         id = result[-1][0]
     except IndexError:
         id = 0
-    for i in range(4):
+    for _ in range(4):
         sleep(0.25)
         print(".", end="")
     sql = f'''INSERT INTO mandarinDB (id, name, email, num, token)
