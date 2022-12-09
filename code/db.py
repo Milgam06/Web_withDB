@@ -1,8 +1,11 @@
 import pymysql
 import pandas
-import json
 import jwt
 from time import sleep
+
+connecting = ""
+cursor = ""
+result = ""
 
 
 name = ""
@@ -20,25 +23,39 @@ def information():
     return name, email, num
     
 
-# milgamDB connect
-milgamDB = pymysql.connect(
-    user = "root",
-    password = "12345678",
-    host = "127.0.0.1",
-    db = "milgam_db",
-    charset = "utf8mb4"
-)
+# connect with database
+def connectDB(users: str, passwords: str, hosts: str, dbName: str, charsets: str = "utf8mb4"):
+    global connecting
+    try:
+        connecting = pymysql.connect(
+            user = users,
+            password = passwords,
+            host = hosts,
+            db = dbName,
+            charset = charsets
+        )
+    except:
+        if not isinstance(users, str) or not isinstance(passwords, str) or not isinstance(hosts, str) or not isinstance(dbName, str) or not isinstance(charsets, str):
+            raise TypeError("Argument's type is wrong")
 
 
 # make cursor what selecting SQL objects
-cursor = milgamDB.cursor()
+def cursoring():    
+    global cursor
+    cursor = connecting.cursor()
 
 
 
 # data lookup & start running SQL
-sql = "SELECT * FROM mandarinDB;"
-cursor.execute(sql)
-result = cursor.fetchall()
+def startSQL(tables: str):
+    global result
+    try:
+        sql = f"SELECT * FROM {tables};"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        return result
+    except:
+        raise TypeError
 
 
 # INSERT the information into the database
