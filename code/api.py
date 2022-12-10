@@ -3,37 +3,17 @@ import pandas
 import jwt
 from time import sleep
 
-connecting = ""
+
 cursor = ""
 result = ""
-
-
-name = ""
-email = ""
-num = ""
 id = 1
-
-# input information
-def information():
-    global name, email, num
-    print("If you finish to put your information, You can no longer change it.")
-    name = str(input("Name: "))
-    email = str(input("Email: "))
-    num = str(input("Number (No hyphen): "))
-    return name, email, num
-    
 
 # connect with database
 def connectDB(users: str, passwords: str, hosts: str, dbName: str, charsets: str = "utf8mb4"):
     global connecting
     try:
-        connecting = pymysql.connect(
-            user = users,
-            password = passwords,
-            host = hosts,
-            db = dbName,
-            charset = charsets
-        )
+        connecting = pymysql.connect(user = users, password = passwords, host = hosts, db = dbName, charset = charsets)
+        return connecting
     except:
         if not isinstance(users, str) or not isinstance(passwords, str) or not isinstance(hosts, str) or not isinstance(dbName, str) or not isinstance(charsets, str):
             raise TypeError("Argument's type is wrong")
@@ -45,7 +25,6 @@ def cursoring():
     cursor = connecting.cursor()
 
 
-
 # data lookup & start running SQL
 def startSQL(tables: str):
     global result
@@ -53,13 +32,14 @@ def startSQL(tables: str):
         sql = f"SELECT * FROM {tables};"
         cursor.execute(sql)
         result = cursor.fetchall()
-        return result
+        print("Success connecting 😎")
     except:
-        raise TypeError
+        raise TypeError(f"Can't find the tables named {tables}")
 
 
 # INSERT the information into the database
-def plusData():
+def insertData(name: str, email: str, num: str):
+    global connecting
     global id
     try:
         id = result[-1][0]
@@ -71,8 +51,6 @@ def plusData():
     sql = f'''INSERT INTO mandarinDB (id, name, email, num, token)
         Value ('{id+1}', '{name}', '{email}', '{num}', 'token');'''
     cursor.execute(sql)
-    milgamDB.commit()
-    return print(" success😎")
+    connecting.commit()
+    return print("Success to INSERT😎")
 
-    
-    
