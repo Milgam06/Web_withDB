@@ -3,7 +3,6 @@ import pandas
 import jwt
 from time import sleep
 
-
 cursor = ""
 result = ""
 id = 1
@@ -27,6 +26,8 @@ def cursoring():
 
 # data lookup & start running SQL
 def startSQL(tables: str):
+    global table
+    table = tables
     global result
     try:
         sql = f"SELECT * FROM {tables};"
@@ -39,6 +40,7 @@ def startSQL(tables: str):
 
 # INSERT the information into the database
 def insertData(name: str, email: str, num: str):
+    global table
     global connecting
     global id
     try:
@@ -48,7 +50,7 @@ def insertData(name: str, email: str, num: str):
     for _ in range(4):
         sleep(0.25)
         print(".", end="")
-    sql = f'''INSERT INTO mandarinDB (id, name, email, num, token)
+    sql = f'''INSERT INTO {table} (id, name, email, num, token)
         Value ('{id+1}', '{name}', '{email}', '{num}', 'token');'''
     cursor.execute(sql)
     connecting.commit()
