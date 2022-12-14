@@ -1,3 +1,5 @@
-import token
+import jwt
 
-# token = token.encode({"user_id":},SECRET,algorithm="HS256")
+
+userID = str(input("Username: ")) 
+token = jwt.encode({"user_id": userID},)
