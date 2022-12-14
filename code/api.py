@@ -7,6 +7,11 @@ cursor = ""
 result = ""
 id = 1
 
+
+if __name__ == "__main__":
+    raise ValueError("This file is api file. \n Please import this in other python file.")
+
+
 # connect with database
 def connectDB(users: str, passwords: str, hosts: str, dbName: str, charsets: str = "utf8mb4"):
     global connecting
