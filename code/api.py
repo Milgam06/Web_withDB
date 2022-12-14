@@ -56,3 +56,5 @@ def insertData(name: str, email: str, num: str):
     connecting.commit()
     return print("Success to INSERT😎")
 
+
+# def selectData():
