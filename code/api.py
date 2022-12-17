@@ -3,8 +3,7 @@ import pandas
 import jwt
 from time import sleep
 
-cursor = ""
-result = ""
+
 id = 1
 
 
@@ -62,4 +61,10 @@ def insertData(name: str, email: str, num: str):
     return print("Success to INSERT😎")
 
 
-# def selectData():
+# find Data from rows in tables named arguments 
+def selectData(tables: str, feild: str, object: str):
+    sql = f"SELECT * FROM {tables} where {feild} = '{object}'"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    for data in result:
+        print(data)
