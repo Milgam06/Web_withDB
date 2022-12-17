@@ -61,10 +61,14 @@ def insertData(name: str, email: str, num: str):
     return print("Success to INSERT😎")
 
 
-# find Data from rows in tables named arguments 
+# find Data from rows in tables named parameters
 def selectData(tables: str, feild: str, object: str):
     sql = f"SELECT * FROM {tables} where {feild} = '{object}'"
     cursor.execute(sql)
+    if cursor.execute(sql) == 0:
+        raise NameError("Can't find the data in your database")
+    else:
+        pass
     result = cursor.fetchall()
     for data in result:
         print(data)
