@@ -72,3 +72,7 @@ def selectData(tables: str, feild: str, object: str):
     result = cursor.fetchall()
     for data in result:
         print(data)
+
+
+
+# update data 
