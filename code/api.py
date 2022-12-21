@@ -23,7 +23,7 @@ def connectDB(users: str, passwords: str, hosts: str, dbName: str, charsets: str
 
 
 # make cursor what selecting SQL objects
-def cursoring():    
+def cursoring():
     global cursor
     cursor = connecting.cursor()
 
@@ -47,6 +47,12 @@ def insertData(name: str, email: str, num: str):
     global table
     global connecting
     global id
+    info = {
+        "name" : {name},
+        "email": {email},
+        "num" : {num}
+    }
+    token = jwt.encode(info )
     try:
         id = result[-1][0]
     except IndexError:
@@ -75,4 +81,5 @@ def selectData(tables: str, feild: str, object: str):
 
 
 
-# update data 
+# # update data
+# def updataData
