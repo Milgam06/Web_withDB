@@ -3,9 +3,8 @@ import pandas
 import jwt
 from time import sleep
 
-
 id = 1
-
+secret="너가 원하는 시크릿 키"
 
 if __name__ == "__main__":
     raise ValueError("This file is api file. \n Please import this in other python file.")
@@ -47,12 +46,12 @@ def insertData(name: str, email: str, num: str):
     global table
     global connecting
     global id
+    global secret
     info = {
         "name" : {name},
         "email": {email},
         "num" : {num}
     }
-    token = jwt.encode(info )
     try:
         id = result[-1][0]
     except IndexError:
@@ -60,6 +59,7 @@ def insertData(name: str, email: str, num: str):
     for _ in range(4):
         sleep(0.25)
         print(".", end="")
+    connecting.
     sql = f'''INSERT INTO {table} (id, name, email, num, token)
         Value ('{id+1}', '{name}', '{email}', '{num}', 'token');'''
     cursor.execute(sql)
