@@ -7,7 +7,7 @@ id = 1
 secret="너가 원하는 시크릿 키"
 
 if __name__ == "__main__":
-    raise ValueError("This file is api file. \n Please import this in other python file.")
+    raise ValueError("This file is api file. \nPlease import this in other python file.")
 
 
 # connect with database
@@ -27,6 +27,7 @@ def cursoring():
     cursor = connecting.cursor()
 
 
+
 # data lookup & start running SQL
 def startSQL(tables: str):
     global table
@@ -37,6 +38,7 @@ def startSQL(tables: str):
         cursor.execute(sql)
         result = cursor.fetchall()
         print("Success connecting 😎")
+
     except:
         raise TypeError(f"Can't find the tables named {tables}")
 
@@ -56,11 +58,10 @@ def insertData(name: str, email: str, num: str):
         id = result[-1][0]
     except IndexError:
         id = 0
-    for _ in range(4):
+    for _ in range(4): 
         sleep(0.25)
         print(".", end="")
-    connecting.
-    sql = f'''INSERT INTO {table} (id, name, email, num, token)
+    sql = f'''INSERT INTO {table} (id, name, email, num, token) 
         Value ('{id+1}', '{name}', '{email}', '{num}', 'token');'''
     cursor.execute(sql)
     connecting.commit()
@@ -70,7 +71,7 @@ def insertData(name: str, email: str, num: str):
 # find Data from rows in tables named parameters
 def selectData(tables: str, feild: str, object: str):
     sql = f"SELECT * FROM {tables} where {feild} = '{object}'"
-    cursor.execute(sql)
+    cursor.execuvte(sql)
     if cursor.execute(sql) == 0:
         raise NameError("Can't find the data in your database")
     else:
@@ -79,7 +80,10 @@ def selectData(tables: str, feild: str, object: str):
     for data in result:
         print(data)
 
-
+def check():
+    sql = "select column_name from INFORMATION_SCHEMA.COLUMNS where table_schema='milgam_db' and table_name='mandarinDB'"
+    a = cursor.execute(sql)
+    print(a)
 
 # # update data
 # def updataData
